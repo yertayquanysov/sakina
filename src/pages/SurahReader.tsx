@@ -86,8 +86,8 @@ export default function SurahReader() {
     return (
       <div className="grid min-h-dvh place-items-center px-6 text-center">
         <div>
-          <p className="font-display text-xl font-semibold">Surah not found</p>
-          <Link to="/quran" className="mt-3 inline-block text-[12px] font-semibold text-gold">
+          <p className="text-[17px] font-semibold">Surah not found</p>
+          <Link to="/quran" className="mt-3 inline-block text-[12px] font-medium text-brand">
             Back to the Quran
           </Link>
         </div>
@@ -126,57 +126,54 @@ export default function SurahReader() {
 
   return (
     <div className="mx-auto min-h-dvh max-w-md pb-[calc(2rem+env(safe-area-inset-bottom))]">
-      <header className="safe-top sticky top-0 z-30 border-b border-line/60 bg-bg/85 px-4 pb-2.5 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-line bg-bg/85 px-5 pb-2.5 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur-xl">
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate(-1)}
             aria-label="Back"
-            className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line bg-surface text-muted"
+            className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-surface2"
           >
             <ArrowLeft size={16} />
           </button>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-[13px] font-bold leading-tight">{meta.en}</p>
-            <p className="text-[10px] text-muted">
+            <p className="truncate text-[13px] font-semibold leading-tight">{meta.en}</p>
+            <p className="text-[10.5px] text-muted">
               Surah {meta.n} · {meta.ayahs} ayahs · {meta.type}
             </p>
           </div>
           <button
             onClick={() => setSettingsOpen(true)}
             aria-label="Reading settings"
-            className="tap grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-muted"
+            className="tap grid h-9 w-9 place-items-center rounded-full text-muted hover:bg-surface2"
           >
             <Settings2 size={16} />
           </button>
         </div>
       </header>
 
-      <div className="px-4">
-        <div className="relative mt-5 overflow-hidden rounded-[28px] bg-gradient-to-br from-brand to-brand-deep px-5 py-6 text-center text-white shadow-float">
-          <div className="pattern pointer-events-none absolute inset-0 opacity-60" />
-          <div className="relative">
-            <p className="text-[9.5px] font-bold uppercase tracking-[0.22em] text-gold-soft/70">
-              {meta.type === 'Meccan' ? 'Revealed in Makkah' : 'Revealed in Madinah'}
-            </p>
-            <h1 className="mt-2 font-arabic text-[30px] leading-tight text-gold-soft" dir="rtl">
-              {meta.ar}
-            </h1>
-            <p className="mt-1.5 text-[13px] font-semibold">{meta.en}</p>
-            <p className="text-[11px] text-white/50">
-              {meta.meaning} · {meta.ayahs} ayahs
-            </p>
-            {isBookmarked && (
-              <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-gold-soft">
-                <BookmarkCheck size={11} /> Last read
-              </span>
-            )}
-          </div>
+      <div className="px-5">
+        <div className="mt-5 rounded-2xl border border-line bg-surface px-5 py-5 text-center">
+          <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+            {meta.type === 'Meccan' ? 'Revealed in Makkah' : 'Revealed in Madinah'}
+          </p>
+          <h1 className="mt-2 font-arabic text-[28px] leading-tight text-ink" dir="rtl">
+            {meta.ar}
+          </h1>
+          <p className="mt-1.5 text-[13px] font-medium">{meta.en}</p>
+          <p className="mt-0.5 text-[11px] text-muted">
+            {meta.meaning} · {meta.ayahs} ayahs
+          </p>
+          {isBookmarked && (
+            <span className="mt-3 inline-flex items-center gap-1 rounded-md bg-brand-soft px-2 py-1 text-[10px] font-medium text-brand">
+              <BookmarkCheck size={11} /> Last read
+            </span>
+          )}
         </div>
 
         {loading && (
-          <div className="mt-6 space-y-4">
+          <div className="mt-4 space-y-2">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="rounded-2xl border border-line/70 bg-surface p-4">
+              <div key={i} className="rounded-xl border border-line bg-surface p-4">
                 <div className="skeleton mb-3 ml-auto h-6 w-4/5 rounded-lg" />
                 <div className="skeleton mb-2 ml-auto h-6 w-3/5 rounded-lg" />
                 <div className="skeleton h-3 w-full rounded" />
@@ -187,12 +184,12 @@ export default function SurahReader() {
         )}
 
         {error && !loading && (
-          <div className="mt-8 rounded-3xl border border-dashed border-line px-6 py-10 text-center">
-            <p className="font-display text-lg font-semibold">Could not load the surah</p>
+          <div className="mt-5 rounded-2xl border border-line px-6 py-10 text-center">
+            <p className="text-[15px] font-semibold">Could not load the surah</p>
             <p className="mt-1 text-[12px] leading-relaxed text-muted">{error}</p>
             <button
               onClick={() => setRetryKey((k) => k + 1)}
-              className="tap mt-4 inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-[12px] font-bold text-white"
+              className="tap mt-4 inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-[12px] font-semibold text-white"
             >
               <RotateCw size={14} /> Try again
             </button>
@@ -203,14 +200,14 @@ export default function SurahReader() {
           <>
             {number !== 1 && number !== 9 && (
               <p
-                className="mt-7 text-center font-arabic text-[24px] leading-relaxed text-brand dark:text-gold"
+                className="mt-6 text-center font-arabic text-[23px] leading-relaxed text-brand"
                 dir="rtl"
               >
                 {BISMILLAH}
               </p>
             )}
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-4 space-y-2">
               {surah.ayahs.map((ayah) => {
                 const bookmarked = settings.lastRead?.surah === number && settings.lastRead?.ayah === ayah.n
                 return (
@@ -218,12 +215,12 @@ export default function SurahReader() {
                     key={ayah.n}
                     id={`ayah-${ayah.n}`}
                     className={cx(
-                      'scroll-mt-24 rounded-3xl border bg-surface p-4 shadow-card transition-colors',
-                      playing === ayah.n ? 'border-gold/60 ring-1 ring-gold/25' : 'border-line/70',
+                      'scroll-mt-24 rounded-xl border bg-surface p-4 transition-colors',
+                      playing === ayah.n ? 'border-brand/40' : 'border-line',
                     )}
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-[11px] font-bold text-brand dark:text-gold">
+                      <span className="grid h-6 min-w-6 shrink-0 place-items-center rounded-md bg-surface2 px-1 text-[10px] font-medium tabular-nums text-muted">
                         {arabicNumber(ayah.n)}
                       </span>
                       <p
@@ -236,7 +233,7 @@ export default function SurahReader() {
                     </div>
 
                     {settings.translation && (
-                      <p className="mt-3 border-t border-line/60 pt-3 text-[12.5px] leading-relaxed text-muted">
+                      <p className="mt-3 border-t border-line pt-3 text-[12.5px] leading-relaxed text-muted">
                         {ayah.en}
                       </p>
                     )}
@@ -246,9 +243,9 @@ export default function SurahReader() {
                         onClick={() => play(ayah.n)}
                         aria-label={playing === ayah.n ? 'Pause recitation' : 'Play recitation'}
                         className={cx(
-                          'tap grid h-8 w-8 place-items-center rounded-full',
+                          'tap grid h-8 w-8 place-items-center rounded-full transition-colors',
                           playing === ayah.n
-                            ? 'bg-gold text-brand-deep'
+                            ? 'bg-brand text-white'
                             : 'bg-surface2 text-muted',
                         )}
                       >
@@ -261,13 +258,13 @@ export default function SurahReader() {
                         }}
                         aria-label="Mark as last read"
                         className={cx(
-                          'tap grid h-8 w-8 place-items-center rounded-full',
-                          bookmarked ? 'bg-brand text-gold-soft' : 'bg-surface2 text-muted',
+                          'tap grid h-8 w-8 place-items-center rounded-full transition-colors',
+                          bookmarked ? 'bg-brand-soft text-brand' : 'bg-surface2 text-muted',
                         )}
                       >
                         {bookmarked ? <BookmarkCheck size={14} /> : <Bookmark size={14} />}
                       </button>
-                      <span className="ml-auto text-[10px] tabular-nums text-muted/60">
+                      <span className="ml-auto text-[10px] tabular-nums text-muted/70">
                         {number}:{ayah.n}
                       </span>
                     </div>
@@ -276,16 +273,16 @@ export default function SurahReader() {
               })}
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-2.5">
+            <div className="mt-4 grid grid-cols-2 gap-2">
               <button
                 disabled={number === 1}
                 onClick={() => navigate(`/quran/${number - 1}`)}
-                className="tap flex items-center gap-2 rounded-2xl border border-line bg-surface px-3 py-3 text-left disabled:opacity-40"
+                className="tap flex items-center gap-2 rounded-xl border border-line bg-surface px-3 py-3 text-left disabled:opacity-40"
               >
                 <ChevronLeft size={16} className="shrink-0 text-muted" />
                 <span className="min-w-0">
-                  <span className="block text-[9px] uppercase tracking-wide text-muted">Previous</span>
-                  <span className="block truncate text-[12px] font-semibold">
+                  <span className="block text-[9.5px] text-muted">Previous</span>
+                  <span className="block truncate text-[12px] font-medium">
                     {SURAHS[number - 2]?.en ?? '—'}
                   </span>
                 </span>
@@ -293,11 +290,11 @@ export default function SurahReader() {
               <button
                 disabled={number === 114}
                 onClick={() => navigate(`/quran/${number + 1}`)}
-                className="tap flex items-center justify-end gap-2 rounded-2xl border border-line bg-surface px-3 py-3 text-right disabled:opacity-40"
+                className="tap flex items-center justify-end gap-2 rounded-xl border border-line bg-surface px-3 py-3 text-right disabled:opacity-40"
               >
                 <span className="min-w-0">
-                  <span className="block text-[9px] uppercase tracking-wide text-muted">Next</span>
-                  <span className="block truncate text-[12px] font-semibold">
+                  <span className="block text-[9.5px] text-muted">Next</span>
+                  <span className="block truncate text-[12px] font-medium">
                     {SURAHS[number]?.en ?? '—'}
                   </span>
                 </span>
@@ -305,7 +302,7 @@ export default function SurahReader() {
               </button>
             </div>
 
-            <p className="mt-6 text-center text-[10px] leading-relaxed text-muted/60">
+            <p className="mt-5 text-center text-[10px] leading-relaxed text-muted/70">
               Recitation: Mishary Rashid Alafasy · Translation: Saheeh International
             </p>
           </>
@@ -323,8 +320,8 @@ export default function SurahReader() {
         <div className="space-y-5 pb-2">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[13px] font-semibold">Translation</p>
-              <p className="text-[11px] text-muted">Saheeh International</p>
+              <p className="text-[12.5px] font-medium">Translation</p>
+              <p className="text-[10.5px] text-muted">Saheeh International</p>
             </div>
             <Toggle
               checked={settings.translation}
@@ -333,18 +330,18 @@ export default function SurahReader() {
             />
           </div>
           <div>
-            <div className="mb-2 flex items-center gap-1.5 text-[13px] font-semibold">
-              <Type size={14} /> Arabic size
+            <div className="mb-2 flex items-center gap-1.5 text-[12.5px] font-medium">
+              <Type size={14} className="text-muted" /> Arabic size
             </div>
-            <div className="grid grid-cols-4 gap-1.5 rounded-2xl border border-line bg-surface2/60 p-1">
+            <div className="grid grid-cols-4 gap-1 rounded-xl bg-surface2 p-1">
               {FONT_SIZES.map((f) => (
                 <button
                   key={f.label}
                   onClick={() => update({ fontSize: f.value })}
                   className={cx(
-                    'tap rounded-xl py-2 text-[12px] font-bold',
+                    'tap rounded-lg py-1.5 text-[10px] font-medium transition-colors',
                     Math.abs(settings.fontSize - f.value) < 0.01
-                      ? 'bg-surface text-brand shadow-sm dark:text-gold'
+                      ? 'bg-surface text-ink shadow-sm'
                       : 'text-muted',
                   )}
                 >
@@ -353,7 +350,7 @@ export default function SurahReader() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl bg-surface2/60 px-4 py-3 text-[11px] leading-relaxed text-muted">
+          <div className="rounded-xl bg-surface2 px-3.5 py-3 text-[10.5px] leading-relaxed text-muted">
             {loading ? (
               <span className="flex items-center gap-2">
                 <Spinner /> Caching this surah for offline reading…

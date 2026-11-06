@@ -8,32 +8,12 @@ export default function Logo({ size = 44 }: { size?: number }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <defs>
-        <linearGradient id="sakina-bg" x1="0" y1="0" x2="64" y2="64">
-          <stop offset="0" stopColor="#12513F" />
-          <stop offset="1" stopColor="#07281F" />
-        </linearGradient>
-        <linearGradient id="sakina-gold" x1="12" y1="10" x2="52" y2="56">
-          <stop offset="0" stopColor="#E7CD8B" />
-          <stop offset="1" stopColor="#B78F37" />
-        </linearGradient>
-      </defs>
-      <rect width="64" height="64" rx="16" fill="url(#sakina-bg)" />
+      <rect width="64" height="64" rx="16" fill="#0F5B45" />
       <path
-        d="M32 9c9.4 0 17 7.2 17 16.2V52a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3V25.2C15 16.2 22.6 9 32 9Z"
-        stroke="url(#sakina-gold)"
-        strokeWidth="1.6"
-        opacity="0.75"
+        d="M40 21.2a12.6 12.6 0 1 0 0 21.6 14 14 0 1 1 0-21.6Z"
+        fill="#FAFAF9"
       />
-      <path
-        d="M39.4 22.3a11.2 11.2 0 1 0 0 18.2 12.4 12.4 0 1 1 0-18.2Z"
-        fill="url(#sakina-gold)"
-      />
-      <path
-        d="M44.6 27.2l1.1 2.9 2.9 1.1-2.9 1.1-1.1 2.9-1.1-2.9-2.9-1.1 2.9-1.1 1.1-2.9Z"
-        fill="url(#sakina-gold)"
-      />
-      <circle cx="32" cy="52.5" r="1.4" fill="#E7CD8B" opacity="0.9" />
+      <circle cx="43.5" cy="22" r="2.2" fill="#7FE0B8" />
     </svg>
   )
 }

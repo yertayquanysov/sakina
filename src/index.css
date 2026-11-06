@@ -3,35 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --bg: 247 242 232;
-  --surface: 255 253 248;
-  --surface-2: 241 233 218;
-  --ink: 20 37 31;
-  --muted: 108 122 114;
-  --line: 228 218 199;
-  --brand: 11 59 46;
-  --brand-deep: 7 40 31;
-  --brand-soft: 230 240 233;
-  --gold: 183 143 55;
-  --gold-soft: 243 232 203;
-  --danger: 176 66 52;
-  --nav: 255 253 248;
+  --bg: 250 250 249;
+  --surface: 255 255 255;
+  --surface-2: 244 244 242;
+  --ink: 18 19 18;
+  --muted: 113 115 110;
+  --line: 232 232 228;
+  --brand: 15 91 69;
+  --brand-deep: 8 61 46;
+  --brand-soft: 235 244 240;
+  --gold: 15 91 69;
+  --gold-soft: 235 244 240;
+  --danger: 180 66 58;
+  --nav: 250 250 249;
 }
 
 .dark {
-  --bg: 6 18 14;
-  --surface: 12 31 25;
-  --surface-2: 17 42 34;
-  --ink: 240 238 229;
-  --muted: 148 167 157;
-  --line: 30 56 45;
-  --brand: 16 74 56;
-  --brand-deep: 8 44 34;
-  --brand-soft: 18 44 36;
-  --gold: 216 184 106;
-  --gold-soft: 55 47 28;
-  --danger: 226 118 100;
-  --nav: 10 26 21;
+  --bg: 10 10 9;
+  --surface: 19 20 18;
+  --surface-2: 28 29 26;
+  --ink: 242 242 238;
+  --muted: 142 145 138;
+  --line: 38 39 36;
+  --brand: 23 121 92;
+  --brand-deep: 15 91 69;
+  --brand-soft: 20 43 35;
+  --gold: 78 207 160;
+  --gold-soft: 20 43 35;
+  --danger: 229 115 104;
+  --nav: 10 10 9;
 }
 
 @layer base {
@@ -46,12 +46,13 @@
 
   body {
     @apply bg-bg text-ink font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     overscroll-behavior-y: none;
     min-height: 100dvh;
   }
 
   ::selection {
-    background: rgb(var(--gold) / 0.28);
+    background: rgb(var(--brand) / 0.16);
   }
 
   button,
@@ -84,21 +85,17 @@
   }
 
   .pb-nav {
-    padding-bottom: calc(6.25rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));
   }
 
   .tap {
-    @apply transition-transform duration-150 active:scale-[0.97];
-  }
-
-  .arch {
-    border-radius: 9rem 9rem 1.75rem 1.75rem;
+    @apply transition-transform duration-150 active:scale-[0.98];
   }
 
   .glass {
-    background: rgb(var(--nav) / 0.82);
-    backdrop-filter: blur(18px) saturate(1.4);
-    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    background: rgb(var(--nav) / 0.86);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
   }
 
   .hairline {
@@ -107,14 +104,6 @@
 
   .text-balance {
     text-wrap: balance;
-  }
-
-  .pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.10' stroke-width='1'%3E%3Cpath d='M36 4l9.5 22.5L68 36l-22.5 9.5L36 68l-9.5-22.5L4 36l22.5-9.5z'/%3E%3Ccircle cx='36' cy='36' r='12'/%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .pattern-gold {
-    background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A24A' stroke-opacity='0.22' stroke-width='0.9'%3E%3Cpath d='M32 2l8.5 21.5L62 32l-21.5 8.5L32 62l-8.5-21.5L2 32l21.5-8.5z'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   .skeleton {
@@ -137,7 +126,7 @@
 }
 
 .leaflet-control-attribution {
-  background: rgb(var(--surface) / 0.75) !important;
+  background: rgb(var(--surface) / 0.8) !important;
   color: rgb(var(--muted)) !important;
   font-size: 9px !important;
   padding: 2px 6px !important;
@@ -148,42 +137,53 @@
   color: rgb(var(--muted)) !important;
 }
 
+.leaflet-bar a {
+  background: rgb(var(--surface)) !important;
+  color: rgb(var(--ink)) !important;
+  border-color: rgb(var(--line)) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  background: rgb(var(--surface));
+  color: rgb(var(--ink));
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.14);
+}
+
+.leaflet-popup-tip {
+  background: rgb(var(--surface));
+}
+
 .sakina-marker {
   display: grid;
   place-items: center;
-  filter: drop-shadow(0 6px 10px rgb(8 35 27 / 0.35));
 }
 
 .sakina-marker span {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50% 50% 50% 4px;
-  transform: rotate(-45deg);
-  background: #0b3b2e;
-  border: 2px solid #d8b86a;
-  color: #f6f0e4;
-  font-size: 14px;
-}
-
-.sakina-marker span > svg {
-  transform: rotate(45deg);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgb(var(--surface));
+  border: 1.5px solid rgb(var(--brand));
+  color: rgb(var(--brand));
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.16);
 }
 
 .sakina-marker.is-active span {
-  background: #b78f37;
-  border-color: #f6f0e4;
-  color: #14251f;
+  background: rgb(var(--brand));
+  border-color: rgb(var(--brand));
+  color: #ffffff;
 }
 
 .sakina-user-dot {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
-  background: #2f7dd1;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 6px rgb(47 125 209 / 0.22);
+  background: rgb(var(--brand));
+  border: 3px solid rgb(var(--surface));
+  box-shadow: 0 0 0 5px rgb(var(--brand) / 0.18);
 }
 
 @media (prefers-reduced-motion: reduce) {

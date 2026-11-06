@@ -46,7 +46,7 @@ export default function App() {
         <Suspense
           fallback={
             <div className="grid min-h-dvh place-items-center">
-              <Spinner className="h-6 w-6 text-gold" />
+              <Spinner className="h-6 w-6 text-brand" />
             </div>
           }
         >
@@ -69,7 +69,7 @@ export default function App() {
 
       {!online && (
         <div className="pointer-events-none fixed inset-x-0 top-[max(0.5rem,env(safe-area-inset-top))] z-[70] flex justify-center px-4">
-          <div className="flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-[10.5px] font-semibold text-muted shadow-card">
+          <div className="flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-[10.5px] font-medium text-muted">
             <WifiOff size={12} /> Offline — saved content still works
           </div>
         </div>

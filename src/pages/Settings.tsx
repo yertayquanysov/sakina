@@ -64,92 +64,90 @@ export default function Settings() {
   }
 
   return (
-    <div className="mx-auto min-h-dvh max-w-md px-4 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-[max(0.9rem,env(safe-area-inset-top))]">
+    <div className="mx-auto min-h-dvh max-w-md px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))]">
       <header className="flex items-center gap-2">
         <button
           onClick={() => navigate(-1)}
           aria-label="Back"
-          className="tap grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-muted"
+          className="tap grid h-9 w-9 place-items-center rounded-full text-muted hover:bg-surface2"
         >
           <ArrowLeft size={16} />
         </button>
         <div>
-          <h1 className="font-display text-[22px] font-semibold leading-none">Settings</h1>
-          <p className="mt-1 text-[10.5px] text-muted">Sakina, your way</p>
+          <h1 className="text-[20px] font-semibold leading-none tracking-[-0.02em]">Settings</h1>
+          <p className="mt-1.5 text-[11px] text-muted">Sakina, your way</p>
         </div>
       </header>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <SectionTitle>Appearance</SectionTitle>
-        <Card className="p-2">
-          <div className="grid grid-cols-2 gap-1.5">
-            {[
-              { value: 'light' as const, label: 'Daylight', icon: Sun },
-              { value: 'dark' as const, label: 'Night', icon: Moon },
-            ].map((t) => (
-              <button
-                key={t.value}
-                onClick={() => update({ theme: t.value })}
-                className={cx(
-                  'tap flex items-center justify-center gap-2 rounded-2xl py-3 text-[12px] font-semibold',
-                  settings.theme === t.value
-                    ? 'bg-brand text-white'
-                    : 'bg-surface2/60 text-muted',
-                )}
-              >
-                <t.icon size={15} /> {t.label}
-              </button>
-            ))}
-          </div>
-        </Card>
+        <div className="grid grid-cols-2 gap-1 rounded-xl bg-surface2 p-1">
+          {[
+            { value: 'light' as const, label: 'Daylight', icon: Sun },
+            { value: 'dark' as const, label: 'Night', icon: Moon },
+          ].map((t) => (
+            <button
+              key={t.value}
+              onClick={() => update({ theme: t.value })}
+              className={cx(
+                'tap flex items-center justify-center gap-2 rounded-lg py-2.5 text-[12px] font-medium transition-colors',
+                settings.theme === t.value
+                  ? 'bg-surface text-ink shadow-sm'
+                  : 'text-muted',
+              )}
+            >
+              <t.icon size={15} /> {t.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <SectionTitle>Location & prayer</SectionTitle>
-        <Card className="divide-y divide-line/60">
+        <Card className="divide-y divide-line">
           <button
             onClick={() => setLocOpen(true)}
             className="tap flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-soft text-brand dark:text-gold">
-              <MapPin size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <MapPin size={15} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block text-[12.5px] font-semibold">Location</span>
+              <span className="block text-[12.5px] font-medium">Location</span>
               <span className="block truncate text-[10.5px] text-muted">
                 {settings.location?.label ?? 'Not set'}
               </span>
             </span>
-            <ChevronRight size={15} className="shrink-0 text-muted" />
+            <ChevronRight size={15} className="shrink-0 text-muted/60" />
           </button>
 
           <button
             onClick={() => setMethodOpen(true)}
             className="tap flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand-soft text-brand dark:text-gold">
-              <Sparkles size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <Sparkles size={15} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block text-[12.5px] font-semibold">Calculation method</span>
+              <span className="block text-[12.5px] font-medium">Calculation method</span>
               <span className="block truncate text-[10.5px] text-muted">
                 {METHODS.find((m) => m.id === settings.method)?.label}
               </span>
             </span>
-            <ChevronRight size={15} className="shrink-0 text-muted" />
+            <ChevronRight size={15} className="shrink-0 text-muted/60" />
           </button>
 
           <div className="px-4 py-3.5">
-            <p className="text-[12.5px] font-semibold">Asr madhab</p>
+            <p className="text-[12.5px] font-medium">Asr madhab</p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               {(['shafi', 'hanafi'] as Madhab[]).map((m) => (
                 <button
                   key={m}
                   onClick={() => update({ madhab: m })}
                   className={cx(
-                    'tap rounded-xl border py-2 text-[11px] font-semibold',
+                    'tap rounded-lg border py-2 text-[10.5px] font-medium',
                     settings.madhab === m
-                      ? 'border-brand bg-brand text-white'
+                      ? 'border-ink bg-ink text-bg'
                       : 'border-line text-muted',
                   )}
                 >
@@ -161,7 +159,7 @@ export default function Settings() {
 
           <div className="flex items-center justify-between px-4 py-3.5">
             <div>
-              <p className="text-[12.5px] font-semibold">Hijri adjustment</p>
+              <p className="text-[12.5px] font-medium">Hijri adjustment</p>
               <p className="text-[10.5px] text-muted">Match your local moon sighting</p>
             </div>
             <div className="flex items-center gap-2">
@@ -172,7 +170,7 @@ export default function Settings() {
               >
                 <Minus size={13} />
               </button>
-              <span className="w-7 text-center text-[13px] font-bold tabular-nums">
+              <span className="w-7 text-center text-[12.5px] font-semibold tabular-nums">
                 {settings.hijriOffset > 0 ? `+${settings.hijriOffset}` : settings.hijriOffset}
               </span>
               <button
@@ -187,12 +185,12 @@ export default function Settings() {
         </Card>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <SectionTitle>Quran</SectionTitle>
-        <Card className="divide-y divide-line/60">
+        <Card className="divide-y divide-line">
           <div className="flex items-center justify-between px-4 py-3.5">
             <div>
-              <p className="text-[12.5px] font-semibold">Show translation</p>
+              <p className="text-[12.5px] font-medium">Show translation</p>
               <p className="text-[10.5px] text-muted">Saheeh International</p>
             </div>
             <Toggle
@@ -204,17 +202,17 @@ export default function Settings() {
           <div className="px-4 py-3.5">
             <div className="mb-2 flex items-center gap-1.5">
               <Type size={14} className="text-muted" />
-              <p className="text-[12.5px] font-semibold">Arabic text size</p>
+              <p className="text-[12.5px] font-medium">Arabic text size</p>
             </div>
-            <div className="grid grid-cols-4 gap-1.5 rounded-2xl border border-line bg-surface2/50 p-1">
+            <div className="grid grid-cols-4 gap-1 rounded-xl bg-surface2 p-1">
               {FONT_SIZES.map((f) => (
                 <button
                   key={f.value}
                   onClick={() => update({ fontSize: f.value })}
                   className={cx(
-                    'tap rounded-xl py-1.5 text-[10px] font-semibold',
+                    'tap rounded-lg py-1.5 text-[10px] font-medium transition-colors',
                     Math.abs(settings.fontSize - f.value) < 0.01
-                      ? 'bg-surface text-brand shadow-sm dark:text-gold'
+                      ? 'bg-surface text-ink shadow-sm'
                       : 'text-muted',
                   )}
                 >
@@ -226,33 +224,33 @@ export default function Settings() {
         </Card>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <SectionTitle>Your data</SectionTitle>
-        <Card className="divide-y divide-line/60">
+        <Card className="divide-y divide-line">
           <button
             onClick={clearQuranCache}
             className="tap flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-surface2 text-muted">
-              <Database size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <Database size={15} />
             </span>
             <span className="flex-1">
-              <span className="block text-[12.5px] font-semibold">Clear cached surahs</span>
+              <span className="block text-[12.5px] font-medium">Clear cached surahs</span>
               <span className="block text-[10.5px] text-muted">
                 {SURAHS.length} surahs available to download on demand
               </span>
             </span>
-            <RotateCcw size={14} className="text-muted" />
+            <RotateCcw size={14} className="text-muted/60" />
           </button>
           <button
             onClick={() => setConfirmReset('zikr')}
             className="tap flex w-full items-center gap-3 px-4 py-3.5 text-left"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-surface2 text-muted">
-              <Sparkles size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <Sparkles size={15} />
             </span>
             <span className="flex-1">
-              <span className="block text-[12.5px] font-semibold">Reset dhikr history</span>
+              <span className="block text-[12.5px] font-medium">Reset dhikr history</span>
               <span className="block text-[10.5px] text-muted">
                 {zikr.lifetime} lifetime · {zikr.streak} day streak
               </span>
@@ -262,15 +260,15 @@ export default function Settings() {
         </Card>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <SectionTitle>About</SectionTitle>
-        <Card className="divide-y divide-line/60">
+        <Card className="divide-y divide-line">
           <div className="flex items-start gap-3 px-4 py-3.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand dark:text-gold">
-              <ShieldCheck size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <ShieldCheck size={15} />
             </span>
             <div>
-              <p className="text-[12.5px] font-semibold">Private by design</p>
+              <p className="text-[12.5px] font-medium">Private by design</p>
               <p className="mt-0.5 text-[10.5px] leading-relaxed text-muted">
                 Your location, reading progress and dhikr are stored only on this device.
                 No accounts, no tracking.
@@ -278,11 +276,11 @@ export default function Settings() {
             </div>
           </div>
           <div className="flex items-start gap-3 px-4 py-3.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-surface2 text-muted">
-              <BookOpenText size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <BookOpenText size={15} />
             </span>
             <div>
-              <p className="text-[12.5px] font-semibold">Sources</p>
+              <p className="text-[12.5px] font-medium">Sources</p>
               <p className="mt-0.5 text-[10.5px] leading-relaxed text-muted">
                 Quran text from AlQuran Cloud, prayer calculations by Adhan, places from
                 OpenStreetMap.
@@ -290,11 +288,11 @@ export default function Settings() {
             </div>
           </div>
           <div className="flex items-center gap-3 px-4 py-3.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-surface2 text-muted">
-              <Info size={16} />
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface2 text-muted">
+              <Info size={15} />
             </span>
             <div>
-              <p className="text-[12.5px] font-semibold">Sakina 1.0</p>
+              <p className="text-[12.5px] font-medium">Sakina 1.0</p>
               <p className="text-[10.5px] text-muted">Made with care · 1448 AH</p>
             </div>
           </div>
@@ -303,7 +301,7 @@ export default function Settings() {
 
       <button
         onClick={() => setConfirmReset('all')}
-        className="tap mt-4 w-full rounded-2xl border border-danger/25 py-3 text-[11.5px] font-semibold text-danger"
+        className="tap mt-4 w-full rounded-xl border border-danger/25 py-3 text-[11.5px] font-medium text-danger"
       >
         Reset all app data
       </button>
@@ -316,7 +314,7 @@ export default function Settings() {
         title="Calculation method"
         subtitle={`Currently using ${methodLabel(settings.method)}`}
       >
-        <div className="space-y-1 pb-2">
+        <div className="space-y-0.5 pb-2">
           {METHODS.map((m) => (
             <button
               key={m.id}
@@ -325,15 +323,15 @@ export default function Settings() {
                 setMethodOpen(false)
               }}
               className={cx(
-                'tap flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left',
-                settings.method === m.id ? 'bg-brand-soft' : 'hover:bg-surface2/60',
+                'tap flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left',
+                settings.method === m.id ? 'bg-surface2' : 'hover:bg-surface2/60',
               )}
             >
               <span>
-                <span className="block text-[12.5px] font-semibold">{m.label}</span>
+                <span className="block text-[12.5px] font-medium">{m.label}</span>
                 <span className="block text-[10px] text-muted">{m.short}</span>
               </span>
-              {settings.method === m.id && <Check size={16} className="text-gold" />}
+              {settings.method === m.id && <Check size={15} className="text-brand" />}
             </button>
           ))}
         </div>
@@ -353,13 +351,13 @@ export default function Settings() {
         <div className="mt-4 flex gap-2">
           <button
             onClick={() => setConfirmReset(null)}
-            className="tap flex-1 rounded-xl border border-line py-2.5 text-[12px] font-semibold text-muted"
+            className="tap flex-1 rounded-lg border border-line py-2.5 text-[12px] font-medium text-muted"
           >
             Cancel
           </button>
           <button
             onClick={doReset}
-            className="tap flex-1 rounded-xl bg-danger py-2.5 text-[12px] font-bold text-white"
+            className="tap flex-1 rounded-lg bg-danger py-2.5 text-[12px] font-semibold text-white"
           >
             Yes, reset
           </button>

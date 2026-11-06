@@ -51,7 +51,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement
     root.classList.toggle('dark', settings.theme === 'dark')
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', settings.theme === 'dark' ? '#06120E' : '#0B3B2E')
+    if (meta) meta.setAttribute('content', settings.theme === 'dark' ? '#0A0A09' : '#FAFAF9')
   }, [settings])
 
   const update = useCallback((patch: Partial<Settings>) => {
@@ -125,7 +125,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           key={toastState.id}
           className="pointer-events-none fixed inset-x-0 bottom-[calc(6.5rem+env(safe-area-inset-bottom))] z-[60] flex justify-center px-5"
         >
-          <div className="animate-scale-in rounded-2xl bg-brand px-4 py-2.5 text-center text-[13px] font-medium text-white shadow-float">
+          <div className="animate-scale-in rounded-xl bg-ink px-4 py-2.5 text-center text-[12.5px] font-medium text-bg shadow-float">
             {toastState.message}
           </div>
         </div>

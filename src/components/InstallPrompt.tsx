@@ -73,18 +73,18 @@ export default function InstallPrompt() {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-[calc(6.1rem+env(safe-area-inset-bottom))] z-40 mx-auto max-w-md px-3">
-        <div className="animate-fade-up flex items-center gap-3 rounded-2xl border border-line/80 bg-surface p-2.5 pr-2 shadow-float">
-          <Logo size={38} />
+      <div className="fixed inset-x-0 bottom-[calc(4.6rem+env(safe-area-inset-bottom))] z-40 mx-auto max-w-md px-3">
+        <div className="animate-fade-up flex items-center gap-3 rounded-xl border border-line bg-surface p-2.5 pr-2 shadow-float">
+          <Logo size={36} />
           <div className="min-w-0 flex-1">
-            <p className="text-[12.5px] font-bold leading-tight">Install Sakina</p>
+            <p className="text-[12.5px] font-medium leading-tight">Install Sakina</p>
             <p className="truncate text-[10.5px] text-muted">
               Full screen, faster, works offline
             </p>
           </div>
           <button
             onClick={install}
-            className="tap flex items-center gap-1.5 rounded-xl bg-brand px-3 py-2 text-[11.5px] font-bold text-white"
+            className="tap flex items-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-[11.5px] font-semibold text-white"
           >
             <Download size={13} /> Add
           </button>
@@ -106,26 +106,26 @@ export default function InstallPrompt() {
       >
         <div className="space-y-4 pb-2">
           <div className="flex gap-3">
-            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-[12px] font-bold text-brand dark:text-gold">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-surface2 text-[11.5px] font-medium text-muted">
               1
             </span>
-            <p className="text-[13px] leading-relaxed text-muted">
+            <p className="text-[12.5px] leading-relaxed text-muted">
               Tap the <Share size={14} className="inline text-ink" /> Share button in
               your browser toolbar.
             </p>
           </div>
           <div className="flex gap-3">
-            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-[12px] font-bold text-brand dark:text-gold">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-surface2 text-[11.5px] font-medium text-muted">
               2
             </span>
-            <p className="text-[13px] leading-relaxed text-muted">
-              Choose <span className="font-semibold text-ink">Add to Home Screen</span>,
+            <p className="text-[12.5px] leading-relaxed text-muted">
+              Choose <span className="font-medium text-ink">Add to Home Screen</span>,
               then confirm.
             </p>
           </div>
-          <div className="rounded-2xl bg-surface2/70 px-4 py-3 text-[11.5px] leading-relaxed text-muted">
+          <div className="rounded-xl bg-surface2 px-3.5 py-3 text-[11px] leading-relaxed text-muted">
             On Chrome for Android, open the menu and tap{' '}
-            <span className="font-semibold text-ink">Install app</span>.
+            <span className="font-medium text-ink">Install app</span>.
           </div>
         </div>
       </Sheet>

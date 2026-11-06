@@ -23,21 +23,17 @@ export default {
         danger: 'rgb(var(--danger) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         arabic: ['"Noto Naskh Arabic"', '"Times New Roman"', 'serif'],
       },
-      borderRadius: {
-        '4xl': '2rem',
-        arch: '9rem 9rem 1.75rem 1.75rem',
-      },
       boxShadow: {
-        card: '0 1px 2px rgb(16 40 32 / 0.04), 0 12px 32px -18px rgb(16 40 32 / 0.22)',
-        float: '0 18px 50px -18px rgb(8 35 27 / 0.45)',
+        card: '0 1px 2px rgb(0 0 0 / 0.04)',
+        float: '0 16px 40px -20px rgb(0 0 0 / 0.28)',
       },
       keyframes: {
         'fade-up': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'fade-in': {
@@ -45,7 +41,7 @@ export default {
           '100%': { opacity: '1' },
         },
         'scale-in': {
-          '0%': { opacity: '0', transform: 'scale(0.94)' },
+          '0%': { opacity: '0', transform: 'scale(0.97)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
         'sheet-up': {
@@ -54,12 +50,8 @@ export default {
         },
         pop: {
           '0%': { transform: 'scale(1)' },
-          '40%': { transform: 'scale(0.94)' },
+          '40%': { transform: 'scale(0.96)' },
           '100%': { transform: 'scale(1)' },
-        },
-        ripple: {
-          '0%': { transform: 'scale(0.6)', opacity: '0.5' },
-          '100%': { transform: 'scale(1.9)', opacity: '0' },
         },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
@@ -67,12 +59,11 @@ export default {
         },
       },
       animation: {
-        'fade-up': 'fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
-        'fade-in': 'fade-in 0.35s ease both',
-        'scale-in': 'scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both',
-        'sheet-up': 'sheet-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'fade-up': 'fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'fade-in': 'fade-in 0.25s ease both',
+        'scale-in': 'scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'sheet-up': 'sheet-up 0.32s cubic-bezier(0.22, 1, 0.36, 1) both',
         pop: 'pop 0.25s ease',
-        ripple: 'ripple 0.6s ease-out forwards',
         shimmer: 'shimmer 1.6s linear infinite',
       },
     },

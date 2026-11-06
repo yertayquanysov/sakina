@@ -135,110 +135,98 @@ export default function Zikr() {
     })
   }
 
-  const circumference = 2 * Math.PI * 116
+  const circumference = 2 * Math.PI * 118
 
   return (
-    <div className="mx-auto min-h-dvh max-w-md px-4 pb-nav pt-[max(1rem,env(safe-area-inset-top))]">
-      <header className="animate-fade-up flex items-start justify-between">
+    <div className="mx-auto min-h-dvh max-w-md px-5 pb-nav pt-[max(1.25rem,env(safe-area-inset-top))]">
+      <header className="animate-fade-up flex items-start justify-between gap-3">
         <div>
-          <p className="text-[9.5px] font-bold uppercase tracking-[0.24em] text-gold">
-            Remembrance
-          </p>
-          <h1 className="mt-1.5 font-display text-[30px] font-semibold leading-none tracking-tight">
+          <p className="text-[11px] text-muted">Remembrance</p>
+          <h1 className="mt-1 text-[26px] font-semibold leading-none tracking-[-0.03em]">
             Dhikr
           </h1>
-          <p className="mt-1.5 text-[11.5px] text-muted">
+          <p className="mt-2 text-[12px] text-muted">
             {dayTotal > 0 ? `${dayTotal} today` : 'Quiet the heart with remembrance'}
           </p>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1">
           {streak > 0 && (
-            <span className="flex items-center gap-1 rounded-full bg-gold-soft px-2.5 py-1.5 text-[11px] font-bold text-gold">
+            <span className="flex items-center gap-1 rounded-lg bg-surface2 px-2 py-1.5 text-[11px] font-medium text-muted">
               <Flame size={12} /> {streak}
             </span>
           )}
           <button
             onClick={() => setPickerOpen(true)}
             aria-label="Choose dhikr"
-            className="tap grid h-9 w-9 place-items-center rounded-full border border-line bg-surface text-muted"
+            className="tap grid h-9 w-9 place-items-center rounded-full text-muted hover:bg-surface2"
           >
             <ListFilter size={16} />
           </button>
         </div>
       </header>
 
-      <div className="mt-5 animate-fade-up text-center" style={{ animationDelay: '50ms' }}>
-        <p className="font-arabic text-[26px] leading-relaxed text-brand dark:text-gold" dir="rtl">
+      <div className="mt-7 animate-fade-up text-center" style={{ animationDelay: '50ms' }}>
+        <p className="font-arabic text-[25px] leading-relaxed text-ink" dir="rtl">
           {dhikr.arabic}
         </p>
-        <p className="mt-1.5 text-[13px] font-semibold">{dhikr.translit}</p>
+        <p className="mt-2 text-[13px] font-medium">{dhikr.translit}</p>
         <p className="mt-0.5 text-[11px] text-muted">{dhikr.meaning}</p>
       </div>
 
-      <div className="relative mt-4 flex justify-center">
-        <div className="pointer-events-none absolute top-8 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
+      <div className="mt-5 flex justify-center">
         <button
           onClick={tap}
           aria-label={`Count ${dhikr.translit}`}
-          className="tap relative grid h-[268px] w-[268px] place-items-center rounded-full"
+          className="tap relative grid h-[264px] w-[264px] place-items-center rounded-full"
         >
           <svg viewBox="0 0 260 260" className="absolute inset-0 h-full w-full -rotate-90">
+            <circle cx="130" cy="130" r="118" fill="rgb(var(--surface))" />
             <circle
               cx="130"
               cy="130"
-              r="116"
-              fill="rgb(var(--surface))"
-              stroke="rgb(var(--line) / 0.7)"
-              strokeWidth="1"
-            />
-            <circle
-              cx="130"
-              cy="130"
-              r="116"
+              r="118"
               fill="none"
               stroke="rgb(var(--line))"
-              strokeWidth="10"
-              strokeLinecap="round"
+              strokeWidth="3"
             />
             <circle
               cx="130"
               cy="130"
-              r="116"
+              r="118"
               fill="none"
-              stroke="rgb(var(--gold))"
-              strokeWidth="10"
+              stroke="rgb(var(--brand))"
+              strokeWidth="3"
               strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference * (1 - progress)}
               className="transition-[stroke-dashoffset] duration-500 ease-out"
             />
-            <circle cx="130" cy="130" r="98" fill="none" stroke="rgb(var(--line) / 0.6)" strokeWidth="0.8" />
           </svg>
 
           {pulse > 0 && (
             <span
               key={pulse}
-              className="pointer-events-none absolute h-[232px] w-[232px] animate-ripple rounded-full border border-gold/50"
+              className="pointer-events-none absolute h-[248px] w-[248px] animate-fade-in rounded-full border border-brand/20"
             />
           )}
 
           <span className="relative flex flex-col items-center">
             <span
               key={today}
-              className="animate-pop font-display text-[64px] font-semibold leading-none tabular-nums text-ink"
+              className="animate-pop text-[60px] font-semibold leading-none tabular-nums tracking-[-0.05em] text-ink"
             >
               {today}
             </span>
-            <span className="mt-1 text-[11px] font-medium text-muted">of {target}</span>
+            <span className="mt-1.5 text-[11px] text-muted">of {target}</span>
             <span
               className={cx(
-                'mt-3 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.12em]',
-                complete ? 'bg-brand text-gold-soft' : 'bg-surface2 text-muted',
+                'mt-4 inline-flex items-center gap-1 text-[9.5px] font-medium uppercase tracking-[0.14em]',
+                complete ? 'text-brand' : 'text-muted/70',
               )}
             >
               {complete ? (
                 <>
-                  <Check size={10} /> Target complete
+                  <Check size={11} /> Complete
                 </>
               ) : (
                 'Tap to count'
@@ -254,10 +242,8 @@ export default function Zikr() {
             key={t}
             onClick={() => setTarget(t)}
             className={cx(
-              'tap min-w-[58px] rounded-full px-3 py-2 text-[11.5px] font-bold tabular-nums transition-colors',
-              target === t
-                ? 'bg-brand text-white shadow-sm'
-                : 'border border-line bg-surface text-muted',
+              'tap min-w-[56px] rounded-lg px-3 py-2 text-[11.5px] font-medium tabular-nums transition-colors',
+              target === t ? 'bg-ink text-bg' : 'bg-surface2 text-muted',
             )}
           >
             {t}
@@ -269,51 +255,50 @@ export default function Zikr() {
         <button
           onClick={undo}
           disabled={today === 0}
-          className="tap flex flex-col items-center gap-1 rounded-2xl border border-line bg-surface py-3 text-muted disabled:opacity-40"
+          className="tap flex flex-col items-center gap-1 rounded-xl bg-surface2 py-2.5 text-muted disabled:opacity-40"
         >
-          <RotateCcw size={16} />
-          <span className="text-[10.5px] font-semibold">Undo</span>
+          <RotateCcw size={15} />
+          <span className="text-[10px] font-medium">Undo</span>
         </button>
         <button
           onClick={reset}
           disabled={today === 0}
-          className="tap flex flex-col items-center gap-1 rounded-2xl border border-line bg-surface py-3 text-muted disabled:opacity-40"
+          className="tap flex flex-col items-center gap-1 rounded-xl bg-surface2 py-2.5 text-muted disabled:opacity-40"
         >
-          <Trash2 size={16} />
-          <span className="text-[10.5px] font-semibold">Reset</span>
+          <Trash2 size={15} />
+          <span className="text-[10px] font-medium">Reset</span>
         </button>
         <button
           onClick={() => setPickerOpen(true)}
-          className="tap flex flex-col items-center gap-1 rounded-2xl border border-line bg-surface py-3 text-brand dark:text-gold"
+          className="tap flex flex-col items-center gap-1 rounded-xl bg-surface2 py-2.5 text-ink"
         >
-          <Sparkles size={16} />
-          <span className="text-[10.5px] font-semibold">Change</span>
+          <Sparkles size={15} />
+          <span className="text-[10px] font-medium">Change</span>
         </button>
       </div>
 
-      <div className="mt-5 grid animate-fade-up grid-cols-3 gap-2" style={{ animationDelay: '100ms' }}>
+      <Card
+        className="mt-5 grid animate-fade-up grid-cols-3 divide-x divide-line"
+        style={{ animationDelay: '100ms' }}
+      >
         {[
           { label: 'Today', value: dayTotal },
           { label: 'Rounds', value: rounds },
           { label: 'Lifetime', value: state.lifetime },
         ].map((s) => (
-          <Card key={s.label} className="px-2 py-3.5 text-center">
-            <p className="font-display text-[22px] font-semibold leading-none tabular-nums">
+          <div key={s.label} className="px-2 py-3.5 text-center">
+            <p className="text-[20px] font-semibold leading-none tabular-nums tracking-[-0.02em]">
               {s.value > 9999 ? `${Math.floor(s.value / 1000)}k` : s.value}
             </p>
-            <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.12em] text-muted">
-              {s.label}
-            </p>
-          </Card>
+            <p className="mt-1 text-[9.5px] text-muted">{s.label}</p>
+          </div>
         ))}
-      </div>
+      </Card>
 
       <Card className="mt-3 animate-fade-up p-4" style={{ animationDelay: '140ms' }}>
         <div className="mb-3 flex items-center justify-between">
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
-            Last 7 days
-          </p>
-          <p className="text-[10.5px] text-muted">
+          <p className="text-[11px] font-medium text-muted">Last 7 days</p>
+          <p className="text-[10.5px] tabular-nums text-muted">
             {week.reduce((a, b) => a + b.count, 0)} dhikr
           </p>
         </div>
@@ -323,8 +308,8 @@ export default function Zikr() {
               <div className="flex h-12 w-full items-end">
                 <div
                   className={cx(
-                    'w-full rounded-t-md transition-all',
-                    i === week.length - 1 ? 'bg-gold' : 'bg-brand/25 dark:bg-gold/25',
+                    'w-full rounded-sm transition-all',
+                    i === week.length - 1 ? 'bg-brand' : 'bg-brand/20',
                   )}
                   style={{ height: `${Math.max(4, (d.count / maxWeek) * 100)}%` }}
                   title={`${d.count} dhikr`}
@@ -337,10 +322,9 @@ export default function Zikr() {
       </Card>
 
       {dhikr.virtue && (
-        <div className="mt-3 flex gap-2.5 rounded-2xl border border-gold/25 bg-gold-soft/40 px-4 py-3">
-          <Sparkles size={14} className="mt-0.5 shrink-0 text-gold" />
-          <p className="text-[11px] leading-relaxed text-muted">{dhikr.virtue}</p>
-        </div>
+        <p className="mt-4 border-l-2 border-line pl-3 text-[11.5px] leading-relaxed text-muted">
+          {dhikr.virtue}
+        </p>
       )}
 
       <Sheet
@@ -358,23 +342,23 @@ export default function Zikr() {
                 setPickerOpen(false)
               }}
               className={cx(
-                'tap flex w-full items-center gap-3 rounded-2xl border px-3.5 py-3 text-left',
-                d.id === dhikr.id
-                  ? 'border-gold/50 bg-gold-soft/40'
-                  : 'border-line/70 bg-surface',
+                'tap flex w-full items-center gap-3 rounded-xl border px-3.5 py-3 text-left',
+                d.id === dhikr.id ? 'border-brand/30 bg-brand-soft' : 'border-line bg-surface',
               )}
             >
               <div className="min-w-0 flex-1">
-                <p className="font-arabic text-[18px] leading-snug text-brand dark:text-gold" dir="rtl">
+                <p className="font-arabic text-[17px] leading-snug text-ink" dir="rtl">
                   {d.arabic}
                 </p>
-                <p className="mt-0.5 text-[11.5px] font-semibold">{d.translit}</p>
+                <p className="mt-0.5 text-[11.5px] font-medium">{d.translit}</p>
                 <p className="truncate text-[10.5px] text-muted">{d.meaning}</p>
               </div>
               <span className="shrink-0 text-right">
-                <span className="block text-[10px] font-bold text-muted">{d.target}×</span>
+                <span className="block text-[10px] font-medium tabular-nums text-muted">
+                  {d.target}×
+                </span>
                 {d.id === dhikr.id ? (
-                  <Check size={16} className="ml-auto mt-1 text-gold" />
+                  <Check size={15} className="ml-auto mt-1 text-brand" />
                 ) : (
                   <ChevronRight size={15} className="ml-auto mt-1 text-muted/50" />
                 )}

@@ -416,8 +416,8 @@ export default function Maps() {
     const userIcon = L.divIcon({
       className: '',
       html: '<div class="sakina-user-dot"></div>',
-      iconSize: [16, 16],
-      iconAnchor: [8, 8],
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
     })
     L.marker([center.lat, center.lng], { icon: userIcon, zIndexOffset: 1000 })
       .addTo(layer)
@@ -428,14 +428,14 @@ export default function Maps() {
       const icon = L.divIcon({
         className: 'sakina-marker',
         html: `<span>${mode === 'mosque' ? MOSQUE_SVG : HALAL_SVG}</span>`,
-        iconSize: [34, 34],
-        iconAnchor: [17, 30],
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
       })
       const marker = L.marker([place.lat, place.lng], { icon }).addTo(layer)
       marker.bindPopup(
         `<div style="font-family:inherit;min-width:130px"><strong style="font-size:12px">${escapeHtml(
           place.name,
-        )}</strong><br/><span style="font-size:10px;color:#6b7a72">${escapeHtml(
+        )}</strong><br/><span style="font-size:10px;color:rgb(var(--muted))">${escapeHtml(
           place.detail ?? '',
         )} · ${formatDistance(place.distance)}</span></div>`,
       )
@@ -470,18 +470,16 @@ export default function Maps() {
   )
 
   return (
-    <div className="mx-auto min-h-dvh max-w-md pb-nav pt-[max(0.9rem,env(safe-area-inset-top))]">
-      <header className="flex items-start justify-between gap-3 px-4">
+    <div className="mx-auto min-h-dvh max-w-md px-5 pb-nav pt-[max(1.25rem,env(safe-area-inset-top))]">
+      <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[9.5px] font-bold uppercase tracking-[0.24em] text-gold">
-            Around you
-          </p>
-          <h1 className="mt-1.5 font-display text-[28px] font-semibold leading-none tracking-tight">
+          <p className="text-[11px] text-muted">Around you</p>
+          <h1 className="mt-1 text-[26px] font-semibold leading-none tracking-[-0.03em]">
             Nearby
           </h1>
           <button
             onClick={() => setLocOpen(true)}
-            className="tap mt-1.5 flex max-w-[230px] items-center gap-1 text-left text-[11px] text-muted"
+            className="tap mt-2 flex max-w-[230px] items-center gap-1 text-left text-[12px] text-muted"
           >
             <MapPin size={12} className="shrink-0" />
             <span className="truncate">{saved?.label ?? 'London (default)'}</span>
@@ -491,7 +489,7 @@ export default function Maps() {
           onClick={() => requestLocation()}
           disabled={locating}
           aria-label="Use my current location"
-          className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line bg-surface text-muted disabled:opacity-60"
+          className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-surface2 disabled:opacity-60"
         >
           {locating ? <Spinner /> : <LocateFixed size={16} />}
         </button>
@@ -500,16 +498,16 @@ export default function Maps() {
       {!saved && (
         <button
           onClick={() => requestLocation()}
-          className="mx-4 mt-3 flex w-[calc(100%-2rem)] items-center gap-2 rounded-xl border border-gold/30 bg-gold-soft/40 px-3 py-2 text-left"
+          className="mt-3 flex w-full items-center gap-2 rounded-xl bg-surface2 px-3.5 py-2.5 text-left"
         >
-          <Navigation size={13} className="shrink-0 text-gold" />
+          <Navigation size={13} className="shrink-0 text-muted" />
           <p className="text-[10.5px] leading-snug text-muted">
             Showing London. Tap to use your location for places near you.
           </p>
         </button>
       )}
 
-      <div className="mt-3 px-4">
+      <div className="mt-4">
         <Segmented
           value={mode}
           onChange={(v) => {
@@ -523,28 +521,28 @@ export default function Maps() {
         />
       </div>
 
-      <div className="relative mt-3 px-4">
+      <div className="relative mt-3">
         <div
           ref={mapEl}
-          className="h-[36vh] min-h-[230px] overflow-hidden rounded-3xl border border-line/80 bg-surface2 shadow-card"
+          className="h-[34vh] min-h-[220px] overflow-hidden rounded-2xl border border-line bg-surface2"
         />
         {loading && (
-          <div className="pointer-events-none absolute inset-0 mx-4 grid place-items-center rounded-3xl bg-surface/50 backdrop-blur-[1px]">
-            <span className="flex items-center gap-2 rounded-full bg-surface px-3.5 py-2 text-[11px] font-semibold text-muted shadow-card">
+          <div className="pointer-events-none absolute inset-0 grid place-items-center rounded-2xl bg-surface/50 backdrop-blur-[1px]">
+            <span className="flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-2 text-[11px] font-medium text-muted">
               <Spinner /> Finding places…
             </span>
           </div>
         )}
-        <div className="absolute right-6 top-3 flex flex-col gap-1">
+        <div className="absolute right-3 top-3 flex flex-col gap-1">
           {[2000, 3000, 5000, 10000].map((r) => (
             <button
               key={r}
               onClick={() => setRadius(r)}
               className={cx(
-                'rounded-lg px-2 py-1 text-[9px] font-bold shadow-sm backdrop-blur transition-colors',
+                'rounded-md border px-2 py-1 text-[9px] font-medium backdrop-blur transition-colors',
                 radius === r
-                  ? 'bg-brand text-white'
-                  : 'bg-surface/90 text-muted hover:bg-surface',
+                  ? 'border-ink bg-ink text-bg'
+                  : 'border-line bg-surface/90 text-muted hover:bg-surface',
               )}
             >
               {r / 1000} km
@@ -553,90 +551,84 @@ export default function Maps() {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between px-4">
-        <p className="text-[11px] font-semibold text-muted">{subtitle}</p>
-        <p className="text-[9px] uppercase tracking-wide text-muted/60">
+      <div className="mt-3 flex items-center justify-between">
+        <p className="text-[11px] font-medium text-muted">{subtitle}</p>
+        <p className="text-[9px] uppercase tracking-[0.08em] text-muted/60">
           {mode === 'mosque' ? 'OpenStreetMap' : 'Halal tagged'}
         </p>
       </div>
 
-      <div className="mt-2 space-y-2 px-4">
+      <div className="mt-3 space-y-1.5">
         {error && !loading && (
-          <Card className="p-5 text-center">
-            <p className="text-[12.5px] font-semibold">{error}</p>
+          <Card className="px-5 py-6 text-center">
+            <p className="text-[12.5px] font-medium">{error}</p>
             <button
               onClick={() => setRetry((r) => r + 1)}
-              className="tap mt-3 inline-flex items-center gap-1.5 rounded-xl bg-brand px-3.5 py-2 text-[11.5px] font-bold text-white"
+              className="tap mt-3 inline-flex items-center gap-1.5 rounded-lg bg-brand px-3.5 py-2 text-[11.5px] font-semibold text-white"
             >
               <RotateCw size={13} /> Try again
             </button>
           </Card>
         )}
 
-        {!error &&
-          !loading &&
-          places.length === 0 && (
-            <EmptyState
-              icon={<SearchX size={20} />}
-              title={mode === 'mosque' ? 'No masjids found' : 'No halal places found'}
-              body="Try a wider radius, or move the map to a nearby town."
-              action={
-                <button
-                  onClick={() => setRadius((r) => Math.min(10000, r + 2000))}
-                  className="text-[11.5px] font-bold text-gold"
-                >
-                  Search wider
-                </button>
-              }
-            />
-          )}
+        {!error && !loading && places.length === 0 && (
+          <EmptyState
+            icon={<SearchX size={20} />}
+            title={mode === 'mosque' ? 'No masjids found' : 'No halal places found'}
+            body="Try a wider radius, or move the map to a nearby town."
+            action={
+              <button
+                onClick={() => setRadius((r) => Math.min(10000, r + 2000))}
+                className="rounded-lg border border-line px-3 py-1.5 text-[11.5px] font-medium text-ink"
+              >
+                Search wider
+              </button>
+            }
+          />
+        )}
 
         {places.map((place) => (
           <div
             key={place.id}
             onClick={() => setActiveId(place.id)}
             className={cx(
-              'flex cursor-pointer items-center gap-3 rounded-2xl border bg-surface p-3 shadow-card transition-colors',
-              activeId === place.id ? 'border-gold/50 bg-gold-soft/20' : 'border-line/70',
+              'flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors',
+              activeId === place.id
+                ? 'border-brand/30 bg-brand-soft'
+                : 'border-line bg-surface hover:bg-surface2/60',
             )}
           >
-            <span
-              className={cx(
-                'grid h-10 w-10 shrink-0 place-items-center rounded-xl',
-                mode === 'mosque'
-                  ? 'bg-brand-soft text-brand dark:text-gold'
-                  : 'bg-gold-soft text-gold',
-              )}
-            >
-              {mode === 'mosque' ? <MosqueGlyph /> : <Utensils size={17} />}
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-surface2 text-ink">
+              {mode === 'mosque' ? <MosqueGlyph /> : <Utensils size={16} strokeWidth={1.8} />}
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[12.5px] font-semibold leading-tight">{place.name}</p>
-              <p className="mt-0.5 truncate text-[10px] capitalize text-muted">
+              <p className="truncate text-[12.5px] font-medium leading-tight">{place.name}</p>
+              <p className="mt-0.5 truncate text-[10.5px] capitalize text-muted">
                 {place.detail}
                 {place.address ? ` · ${place.address}` : ''}
               </p>
-              <p className="mt-0.5 text-[10px] font-semibold text-gold">
-                {formatDistance(place.distance)} away
-              </p>
             </div>
-            <a
-              href={mapsLink(place.lat, place.lng, place.name)}
-              target="_blank"
-              rel="noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              aria-label={`Directions to ${place.name}`}
-              className="tap grid h-9 w-9 shrink-0 place-items-center rounded-full bg-surface2 text-muted"
-            >
-              <ArrowUpRight size={15} />
-            </a>
+            <span className="shrink-0 text-right">
+              <span className="block text-[10.5px] font-medium tabular-nums text-brand">
+                {formatDistance(place.distance)}
+              </span>
+              <a
+                href={mapsLink(place.lat, place.lng, place.name)}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Directions to ${place.name}`}
+                className="tap mt-1 inline-grid h-7 w-7 place-items-center rounded-full text-muted hover:bg-surface2"
+              >
+                <ArrowUpRight size={14} />
+              </a>
+            </span>
           </div>
         ))}
 
         {!loading && places.length > 0 && (
-          <p className="pb-2 pt-1 text-center text-[9.5px] leading-relaxed text-muted/60">
-            Community data from OpenStreetMap. Please verify halal certification with the
-            venue.
+          <p className="pb-2 pt-2 text-center text-[10px] leading-relaxed text-muted/70">
+            Community data from OpenStreetMap. Verify halal certification with the venue.
           </p>
         )}
       </div>
