@@ -6,7 +6,7 @@ A mobile-first Muslim companion PWA: prayer times, Qibla, the Quran, dhikr, near
 
 ```bash
 npm install
-npm run dev          # http://127.0.0.1:5173
+npm run dev          # http://127.0.0.1:5180/sakina/
 ```
 
 Production build + local PWA preview:

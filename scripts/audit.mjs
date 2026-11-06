@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core'
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-const BASE = 'http://127.0.0.1:5173'
+const BASE = 'http://127.0.0.1:5180/sakina'
 
 const browser = await puppeteer.launch({
   executablePath: CHROME,
@@ -35,7 +35,7 @@ for (const width of [320, 360, 390]) {
   await page.evaluateOnNewDocument((s) => {
     localStorage.setItem('sakina:settings:v1', JSON.stringify(s))
   }, settings)
-  await page.goto(BASE, { waitUntil: 'domcontentloaded' })
+  await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
 
   console.log(`\n===== viewport ${width}px =====`)
   for (const route of routes) {
@@ -90,9 +90,9 @@ for (const width of [320, 360, 390]) {
 
 const desktop = await browser.newPage()
 await desktop.setViewport({ width: 1280, height: 900 })
-await desktop.goto(BASE, { waitUntil: 'domcontentloaded' })
+await desktop.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
 await desktop.evaluate((s) => localStorage.setItem('sakina:settings:v1', JSON.stringify(s)), settings)
-await desktop.goto(BASE, { waitUntil: 'networkidle2' })
+await desktop.goto(BASE + '/', { waitUntil: 'networkidle2' })
 await new Promise((r) => setTimeout(r, 1000))
 const desktopAudit = await desktop.evaluate(() => {
   const nav = document.querySelector('nav')

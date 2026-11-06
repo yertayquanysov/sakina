@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core'
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-const BASE = 'http://127.0.0.1:5173'
+const BASE = 'http://127.0.0.1:5180/sakina'
 
 const settings = {
   theme: 'light',
@@ -58,7 +58,7 @@ const clickText = async (text, selector = 'button') => {
 const read = (key) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) || 'null'), key)
 
 await seed()
-await page.goto(BASE, { waitUntil: 'networkidle2' })
+await page.goto(BASE + '/', { waitUntil: 'networkidle2' })
 await new Promise((r) => setTimeout(r, 800))
 
 // ---- Map: mosques
@@ -158,7 +158,7 @@ const theme = await page.evaluate(() => ({
 console.log('[SETTINGS] theme', theme)
 
 // ---- Location picker
-await page.goto(BASE, { waitUntil: 'networkidle2' })
+await page.goto(BASE + '/', { waitUntil: 'networkidle2' })
 await new Promise((r) => setTimeout(r, 700))
 await page.evaluate(() => {
   const btn = [...document.querySelectorAll('button')].find((b) => b.textContent?.includes('London, United Kingdom'))
@@ -174,7 +174,7 @@ console.log('[LOCATION] home', homeText)
 // ---- Onboarding skip (fresh page without the seeded settings)
 const fresh = await browser.newPage()
 await fresh.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true })
-await fresh.goto(BASE, { waitUntil: 'networkidle2' })
+await fresh.goto(BASE + '/', { waitUntil: 'networkidle2' })
 await fresh.evaluate(() => localStorage.clear())
 await fresh.reload({ waitUntil: 'networkidle2' })
 await new Promise((r) => setTimeout(r, 800))

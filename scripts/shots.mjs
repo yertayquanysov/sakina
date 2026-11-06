@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer-core'
 import { mkdir } from 'node:fs/promises'
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-const BASE = 'http://127.0.0.1:5173'
+const BASE = 'http://127.0.0.1:5180/sakina'
 const OUT = '/Users/ertai/sakina/.shots'
 
 await mkdir(OUT, { recursive: true })
@@ -25,7 +25,7 @@ const shot = async (name) => {
   console.log('shot', name)
 }
 
-await page.goto(BASE, { waitUntil: 'networkidle2' })
+await page.goto(BASE + '/', { waitUntil: 'networkidle2' })
 await new Promise((r) => setTimeout(r, 1200))
 await shot('01-onboarding')
 
